@@ -1,5 +1,10 @@
-import { Board } from "./board"
+import { Game } from "./game";
 
-const board = new Board();
+document.addEventListener("DOMContentLoaded", function () {
+    const game = new Game();
+
+    game.init();
+})
+
 
 

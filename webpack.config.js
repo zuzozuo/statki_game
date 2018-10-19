@@ -1,8 +1,10 @@
 const path = require('path');
 module.exports = {
   entry: {
-    script: './src/script.ts',
-    board: './src/board.ts'
+    script: ['./src/script.ts', './src/board.ts', './src/ships.ts',
+      './src/user.ts', './src/computer.ts', './src/player.ts',
+      './src/game.ts'],
+
   },
   output: {
     path: path.resolve(__dirname, './dist'),

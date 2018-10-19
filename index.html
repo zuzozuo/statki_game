@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="dist/script.bundle.js"></script>
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <title>Document</title>
 </head>
-<body>
-    <div classname="board">
 
+<body>
+    <div id="bigBoard">
+        <div class="midBoard">
+            <p>BoardPlayerMine</p>
+            <div id="BoardPlayerMine" class="board"></div>
+            <p>BoardPlayerOpponent</p>
+            <div id="BoardPlayerOpponent" class="board"></div>
+        </div>
+        <div class="midBoard">
+            <p>BoardComputerMine</p>
+            <div id="BoardComputerMine" class="board"></div>
+            <p>BoardComputerOpponent</p>
+            <div id="BoardComputerOpponent" class="board"></div>
+        </div>
     </div>
-    
+
 </body>
+
 </html>

@@ -1,5 +1,26 @@
-board{
-    width: 200px;
-    height: 200px;
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.x{
+    width: 20px;
+    height: 20px;
     border: 1px solid black;
+    float: left;
+}
+
+.y{
+    width: 220px;
+    height: 22px;
+}
+
+
+.midBoard{
+    width: 50%;
+    float: left;
+}
+
+.board{
+    margin: 20px;
 }
