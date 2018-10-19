@@ -1,4 +1,5 @@
 import { Board } from "./board"
+import { Ships } from "./ships"
 export class User {
     myBoard: Board
     opponentBoard: Board

@@ -3,7 +3,7 @@ module.exports = {
   entry: {
     script: ['./src/script.ts', './src/board.ts', './src/ships.ts',
       './src/user.ts', './src/computer.ts', './src/player.ts',
-      './src/game.ts'],
+      './src/game.ts', './src/enums.ts'],
 
   },
   output: {

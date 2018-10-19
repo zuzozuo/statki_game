@@ -110,6 +110,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./src/enums.ts":
+/*!**********************!*\
+  !*** ./src/enums.ts ***!
+  \**********************/
+/*! exports provided: GameModes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GameModes\", function() { return GameModes; });\nvar GameModes;\n(function (GameModes) {\n    GameModes[GameModes[\"NothingHappens\"] = 0] = \"NothingHappens\";\n    GameModes[GameModes[\"PlayerPlacing\"] = 1] = \"PlayerPlacing\";\n    GameModes[GameModes[\"ComputerPlacing\"] = 2] = \"ComputerPlacing\";\n    GameModes[GameModes[\"PlayerShooting\"] = 3] = \"PlayerShooting\";\n    GameModes[GameModes[\"ComputerShooting\"] = 4] = \"ComputerShooting\";\n})(GameModes || (GameModes = {}));\n\n\n//# sourceURL=webpack:///./src/enums.ts?");
+
+/***/ }),
+
 /***/ "./src/game.ts":
 /*!*********************!*\
   !*** ./src/game.ts ***!
@@ -118,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Game\", function() { return Game; });\n/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./player */ \"./src/player.ts\");\n/* harmony import */ var _computer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./computer */ \"./src/computer.ts\");\n\n\nvar Game = /** @class */ (function () {\n    function Game() {\n        this.player = new _player__WEBPACK_IMPORTED_MODULE_0__[\"Player\"]();\n        this.computer = new _computer__WEBPACK_IMPORTED_MODULE_1__[\"Computer\"]();\n    }\n    Game.prototype.init = function () {\n        var boards = document.getElementsByClassName(\"board\");\n        for (var i = 0; i < boards.length; i++) {\n            boards[i].addEventListener(\"mouseover\", this.onMouseOver);\n        }\n        this.update();\n    };\n    Game.prototype.onMouseOver = function (e) {\n        var el = e.target;\n        if (el.className == \"x\") {\n            var id = el.parentNode.parentNode.id;\n        }\n    };\n    Game.prototype.update = function () {\n        this.player.update();\n        this.computer.update();\n        console.log(\"UPDATE\");\n    };\n    return Game;\n}());\n\n\n\n//# sourceURL=webpack:///./src/game.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Game\", function() { return Game; });\n/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./player */ \"./src/player.ts\");\n/* harmony import */ var _computer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./computer */ \"./src/computer.ts\");\n/* harmony import */ var _enums__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./enums */ \"./src/enums.ts\");\n\n\n\nvar Game = /** @class */ (function () {\n    function Game() {\n        this.mode = _enums__WEBPACK_IMPORTED_MODULE_2__[\"GameModes\"].NothingHappens;\n        this.player = new _player__WEBPACK_IMPORTED_MODULE_0__[\"Player\"]();\n        this.computer = new _computer__WEBPACK_IMPORTED_MODULE_1__[\"Computer\"]();\n    }\n    Game.prototype.init = function () {\n        this.mode = _enums__WEBPACK_IMPORTED_MODULE_2__[\"GameModes\"].PlayerPlacing;\n        var boards = document.getElementsByClassName(\"board\");\n        for (var i = 0; i < boards.length; i++) {\n            boards[i].addEventListener(\"mouseover\", this.onMouseOver);\n        }\n        this.update();\n    };\n    Game.prototype.onMouseOver = function (e) {\n        var el = e.target;\n        if (el.className == \"x\") {\n            var id = el.parentNode.parentNode.id;\n            switch (this.mode) {\n                case _enums__WEBPACK_IMPORTED_MODULE_2__[\"GameModes\"].PlayerPlacing:\n                    if (id == \"BoardPlayerMine\") {\n                        //TODO\n                    }\n                    break;\n                case _enums__WEBPACK_IMPORTED_MODULE_2__[\"GameModes\"].PlayerShooting:\n                    if (id == \"BoardPlayerOpponent\") {\n                        //TODO\n                    }\n                    break;\n            }\n        }\n    };\n    Game.prototype.update = function () {\n        this.player.update();\n        this.computer.update();\n        console.log(\"UPDATE\");\n    };\n    return Game;\n}());\n\n\n\n//# sourceURL=webpack:///./src/game.ts?");
 
 /***/ }),
 
