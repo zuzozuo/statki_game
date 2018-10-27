@@ -6,7 +6,7 @@ export class Player extends User {
         // console.log("Uruchamiam konstruktor klasy PLAYER")
     }
 
-    drawMenu(menu: HTMLElement, callBack: EventHandlerNonNull) {
+    drawMenu(menu: HTMLElement, callBack: Function) {
         for (let i = this.ships.length - 1; i >= 0; i--) {
             this.ships[i].drawOnMenu(menu, callBack);
         }
