@@ -17,10 +17,34 @@
 
 
 .midBoard{
-    width: 50%;
+    width: 400px;
     float: left;
 }
 
 .board{
     margin: 20px;
+}
+
+.shipBlock{
+    border: 1px solid black;
+    background-color: steelblue;
+    float: left;
+    width: 20px;
+    height: 20px;
+    
+}
+
+.shipContainer{
+    width: 20px;
+    min-height: 20px;
+    float: left;
+    margin: 5px;
+}
+
+#shipsMenu{
+    width: 25px;
+    min-height: 30vh;
+    /*border: 1px solid black;*/
+    float: left;
+    margin-right: 10px;
 }

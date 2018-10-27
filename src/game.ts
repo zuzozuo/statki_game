@@ -13,12 +13,20 @@ export class Game {
     }
 
     init() {
+
         this.mode = GameModes.PlayerPlacing
         const boards = document.getElementsByClassName("board")
+        const shipsMenu = document.getElementById("shipsMenu")
         for (let i = 0; i < boards.length; i++) {
             boards[i].addEventListener("mouseover", this.onMouseOver)
         }
 
+        this.player.init();
+        this.computer.init();
+        if (shipsMenu) {
+            this.player.drawMenu(shipsMenu, this.onMenuClick);
+
+        }
         this.update();
     }
 
@@ -39,6 +47,10 @@ export class Game {
                     break;
             }
         }
+    }
+
+    onMenuClick(e: Event) {
+        console.log('Click')
     }
 
     update() {

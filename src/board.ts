@@ -14,7 +14,7 @@ export class Board {
     }
 
     draw(mainDiv: string) {
-        console.log(mainDiv)
+        // console.log(mainDiv)
         let html: string = "";
         let div: HTMLElement | null = document.getElementById(mainDiv);
 
