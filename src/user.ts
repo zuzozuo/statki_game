@@ -15,7 +15,7 @@ export class User {
 
     init() {
         for (let i = 0; i < Ships.length; i++) {
-            this.ships.push(new Ship(Ships[i]))
+            this.ships.push(new Ship(Ships[i], i + 1))
         }
 
     }

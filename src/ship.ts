@@ -2,9 +2,12 @@ import { ShipDirection } from "./enums"
 export class Ship {
     length: number
     direction: ShipDirection
-    constructor(length: number) {
+    shipId: number
+    constructor(length: number, id: number) {
         this.length = length
         this.direction = ShipDirection.Vertical
+        this.shipId = id;
+
         //console.log("Tworze nowy ship o dł: " + this.length)
     }
 
@@ -19,7 +22,6 @@ export class Ship {
             if (callBack(this) == true) {
                 menu.removeChild(shipContainer)
             }
-
 
         })
     }

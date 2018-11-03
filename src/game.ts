@@ -19,7 +19,7 @@ export class Game {
 
     init() {
 
-        this.mode = GameModes.PlayerPlacing
+        this.mode = GameModes.ComputerPlacing
         const boards = document.getElementsByClassName("board")
         const shipsMenu = document.getElementById("shipsMenu")
         window.oncontextmenu = this.onContextMenu.bind(this);
@@ -30,6 +30,7 @@ export class Game {
 
         this.player.init();
         this.computer.init();
+        this.computer.shipsPlacing();
         if (shipsMenu) {
             this.player.drawMenu(shipsMenu, this.onMenuClick.bind(this));
 
@@ -71,12 +72,11 @@ export class Game {
                                 let dir = this.chosenShip.direction;
 
                                 if (this.player.myBoard.canPlaceOnBoard(x, y, dir, shipLen)) {
-                                    this.player.myBoard.placeOnBoard(x, y, dir, shipLen);
+                                    this.player.myBoard.placeOnBoard(x, y, dir, shipLen, this.chosenShip.shipId);
                                     this.update();
                                     this.chosenShip = null;
                                     this.pointerShip = null;
                                 }
-
                             }
                         }
                     }

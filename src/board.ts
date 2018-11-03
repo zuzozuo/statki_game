@@ -1,4 +1,4 @@
-import { ShipDirection } from "./enums";
+import { ShipDirection, BoardWidth, BoardHeight } from "./enums";
 
 export class Board {
     board: number[][]
@@ -23,13 +23,19 @@ export class Board {
         for (let y = 0; y < this.board.length; y++) {
             html += '<div class="y">'
             for (let x = 0; x < this.board[y].length; x++) {
-                html += '<div class="x" data-x="' + x + '" data-y="' + y + '">' + this.board[y][x] + '</div>';
+                if (this.board[y][x] != 0) {
+                    html += '<div class="x"  style = "background-color: orange"  data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
+                } else {
+                    html += '<div class="x" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
+                }
+
             }
             html += '</div>'
         }
 
         if (div) {
             div.innerHTML = html;
+
         }
 
     }
@@ -42,14 +48,22 @@ export class Board {
         if (dir == dV) {
             for (let i = 0; i < len; i++) {
                 blocksPositions.push([x, y]);
+                if (y > BoardHeight - 1) {
+                    return false;
+                }
                 y++;
             }
         } else {
             for (let i = 0; i < len; i++) {
                 blocksPositions.push([x, y]);
+                if (x > BoardWidth - 1) {
+                    return false;
+                }
                 x++;
             }
         }
+
+
 
         for (let i = 0; i < blocksPositions.length; i++) {
             for (let j = -1; j <= 1; j++) {
@@ -62,13 +76,14 @@ export class Board {
                             return false;
                         }
                     }
+
                 }
             }
         }
         return true;
     }
 
-    placeOnBoard(x: number, y: number, dir: number, len: number) {
+    placeOnBoard(x: number, y: number, dir: number, len: number, id: number) {
         let blocksPositions = [];
         let dV = ShipDirection.Vertical;
         //let dH = ShipDirection.Horizontal;
@@ -88,7 +103,7 @@ export class Board {
         for (let i = 0; i < blocksPositions.length; i++) {
             let boardX = blocksPositions[i][0];
             let boardY = blocksPositions[i][1];
-            this.board[boardY][boardX] = 1;
+            this.board[boardY][boardX] = id;
         }
     }
 
