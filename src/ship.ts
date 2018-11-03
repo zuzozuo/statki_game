@@ -20,6 +20,7 @@ export class Ship {
                 menu.removeChild(shipContainer)
             }
 
+
         })
     }
 
@@ -33,7 +34,7 @@ export class Ship {
     }
 
     changeDirectionStyle(dir: ShipDirection, div: HTMLElement, len: number) {
-        console.log(dir, div);
+        //console.log(dir, div);
         switch (dir) {
             case ShipDirection.Horizontal:
                 div.style.height = "22px";

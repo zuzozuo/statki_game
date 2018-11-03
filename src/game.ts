@@ -37,53 +37,6 @@ export class Game {
         this.update();
     }
 
-
-
-    onMouseClick(e: MouseEvent) {
-        console.log("MouseClick")
-    }
-
-    onContextMenu(e: Event) {
-        e.preventDefault();
-        let el: any = e.target;
-        if (el.className == "x") {
-            let id: string = el.parentNode.parentNode.id
-            switch (this.mode) {
-                case GameModes.PlayerPlacing:
-                    if (id == "BoardPlayerMine") {
-                        if (this.chosenShip != null) {
-                            switch (this.chosenShip.direction) {
-                                case ShipDirection.Vertical:
-                                    this.chosenShip.direction = ShipDirection.Horizontal;
-                                    if (this.pointerShip) {
-                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, this.pointerShip, this.chosenShip.length)
-                                    }
-
-                                    break;
-                                case ShipDirection.Horizontal:
-                                    this.chosenShip.direction = ShipDirection.Vertical;
-                                    if (this.pointerShip) {
-                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, this.pointerShip, this.chosenShip.length)
-                                    }
-                                    break;
-
-                            }
-                            // console.log(this.chosenShip.direction)
-                            console.log(this)
-                            console.log("OnContext")
-                        }
-                    }
-                    break;
-                case GameModes.PlayerShooting:
-                    if (id == "BoardPlayerOpponent") {
-                        //TODO
-                    }
-                    break;
-            }
-        }
-        return false;
-    }
-
     shipRotation(x: number, y: number, dir: ShipDirection, len: number, div: HTMLElement) {
         if (dir == ShipDirection.Vertical) {
             if (y >= BoardHeight - len + 1) {
@@ -100,6 +53,89 @@ export class Game {
         div.style.top = String(y * 22) + 'px';
     }
 
+    //--------------------------------------------------------------------
+
+    onMouseClick(e: MouseEvent) {
+        //console.log("MouseClick")
+        let el: any = e.target;
+        if (el.className == "x") {
+            let id: string = el.parentNode.parentNode.id
+            switch (this.mode) {
+                case GameModes.PlayerPlacing:
+                    if (id == "BoardPlayerMine") {
+                        if (this.chosenShip != null) {
+                            if (this.pointerShip) {
+                                let x = parseInt(el.dataset.x);
+                                let y = parseInt(el.dataset.y);
+                                let shipLen = this.chosenShip.length;
+                                let dir = this.chosenShip.direction;
+
+                                if (this.player.myBoard.canPlaceOnBoard(x, y, dir, shipLen)) {
+                                    this.player.myBoard.placeOnBoard(x, y, dir, shipLen);
+                                    this.update();
+                                    this.chosenShip = null;
+                                    this.pointerShip = null;
+                                }
+
+                            }
+                        }
+                    }
+                    break;
+                case GameModes.PlayerShooting:
+                    if (id == "BoardPlayerOpponent") {
+                        //TODO
+                    }
+                    break;
+            }
+        }
+    }
+
+    onContextMenu(e: Event) {
+        e.preventDefault();
+        let el: any = e.target;
+        if (el.className == "x") {
+            let id: string = el.parentNode.parentNode.id
+            switch (this.mode) {
+                case GameModes.PlayerPlacing:
+                    if (id == "BoardPlayerMine") {
+                        if (this.chosenShip != null) {
+                            if (this.pointerShip) {
+                                let x = parseInt(el.dataset.x);
+                                let y = parseInt(el.dataset.y);
+                                let shipLen = this.chosenShip.length;
+                                let div = this.pointerShip;
+
+                                switch (this.chosenShip.direction) {
+                                    case ShipDirection.Vertical:
+                                        this.chosenShip.direction = ShipDirection.Horizontal;
+                                        this.shipRotation(x, y, this.chosenShip.direction, shipLen, div)
+                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, div, shipLen)
+                                        break;
+
+                                    case ShipDirection.Horizontal:
+                                        this.chosenShip.direction = ShipDirection.Vertical;
+                                        this.shipRotation(x, y, this.chosenShip.direction, shipLen, div)
+                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, div, shipLen)
+                                        break;
+
+                                }
+                                //console.log("OnContext")
+                            }
+
+                        }
+                    }
+                    break;
+                case GameModes.PlayerShooting:
+                    if (id == "BoardPlayerOpponent") {
+                        //TODO
+                    }
+                    break;
+            }
+        }
+        return false;
+    }
+
+
     onMouseOver(e: Event) {
         let el: any = e.target;
         if (el.className == "x") {
@@ -109,15 +145,11 @@ export class Game {
                     if (id == "BoardPlayerMine") {
                         if (this.chosenShip != null) {
                             if (this.pointerShip) {
-                                let x = el.dataset.x;
-                                let y = el.dataset.y;
+                                let x = parseInt(el.dataset.x);
+                                let y = parseInt(el.dataset.y);
                                 let shipLen = this.chosenShip.length;
 
                                 this.shipRotation(x, y, this.chosenShip.direction, shipLen, this.pointerShip)
-
-
-                                // this.pointerShip.style.left = String(x * 22) + 'px';
-                                // this.pointerShip.style.top = String(y * 22) + 'px';
 
                             }
                         }
@@ -148,11 +180,11 @@ export class Game {
 
             board.appendChild(this.pointerShip)
         }
-        console.log(ship)
+        //console.log(ship)
         return true;
     }
 
-
+    //--------------------------------------------------------------------
 
     update() {
         this.player.update();
