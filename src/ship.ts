@@ -32,6 +32,23 @@ export class Ship {
         return text;
     }
 
+    changeDirectionStyle(dir: ShipDirection, div: HTMLElement, len: number) {
+        console.log(dir, div);
+        switch (dir) {
+            case ShipDirection.Horizontal:
+                div.style.height = "22px";
+                div.style.width = String(len * 22) + "px";
+                break;
+            case ShipDirection.Vertical:
+                div.style.width = "22px";
+                div.style.height = String(len * 22) + "px";
+                break;
+        }
+
+    }
+
+
+
 
 
 }

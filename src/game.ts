@@ -52,6 +52,24 @@ export class Game {
                 case GameModes.PlayerPlacing:
                     if (id == "BoardPlayerMine") {
                         if (this.chosenShip != null) {
+                            switch (this.chosenShip.direction) {
+                                case ShipDirection.Vertical:
+                                    this.chosenShip.direction = ShipDirection.Horizontal;
+                                    if (this.pointerShip) {
+                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, this.pointerShip, this.chosenShip.length)
+                                    }
+
+                                    break;
+                                case ShipDirection.Horizontal:
+                                    this.chosenShip.direction = ShipDirection.Vertical;
+                                    if (this.pointerShip) {
+                                        this.chosenShip.changeDirectionStyle(this.chosenShip.direction, this.pointerShip, this.chosenShip.length)
+                                    }
+                                    break;
+
+                            }
+                            // console.log(this.chosenShip.direction)
+                            console.log(this)
                             console.log("OnContext")
                         }
                     }
@@ -64,6 +82,22 @@ export class Game {
             }
         }
         return false;
+    }
+
+    shipRotation(x: number, y: number, dir: ShipDirection, len: number, div: HTMLElement) {
+        if (dir == ShipDirection.Vertical) {
+            if (y >= BoardHeight - len + 1) {
+                y = BoardHeight - len;
+            }
+
+        } else if (dir == ShipDirection.Horizontal) {
+            if (x >= BoardWidth - len + 1) {
+                x = BoardWidth - len;
+            }
+        }
+
+        div.style.left = String(x * 22) + 'px';
+        div.style.top = String(y * 22) + 'px';
     }
 
     onMouseOver(e: Event) {
@@ -79,14 +113,11 @@ export class Game {
                                 let y = el.dataset.y;
                                 let shipLen = this.chosenShip.length;
 
-                                if (this.chosenShip.direction == ShipDirection.Vertical) {
-                                    if (y >= BoardHeight - shipLen + 1) {
-                                        y = BoardHeight - shipLen
-                                    }
+                                this.shipRotation(x, y, this.chosenShip.direction, shipLen, this.pointerShip)
 
-                                }
-                                this.pointerShip.style.left = String(x * 22) + 'px';
-                                this.pointerShip.style.top = String(y * 22) + 'px';
+
+                                // this.pointerShip.style.left = String(x * 22) + 'px';
+                                // this.pointerShip.style.top = String(y * 22) + 'px';
 
                             }
                         }
@@ -114,6 +145,7 @@ export class Game {
 
         if (board) {
             this.pointerShip.innerHTML = ship.returnShipContainer();
+
             board.appendChild(this.pointerShip)
         }
         console.log(ship)
