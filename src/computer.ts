@@ -28,4 +28,19 @@ export class Computer extends User {
 
         }
     }
+
+    computerShooting() {
+        while (true) {
+
+            let randX = Math.floor((Math.random() * BoardWidth));
+            let randY = Math.floor((Math.random() * BoardHeight));
+
+            if (this.opponentBoard.board[randY][randX] == 0) { ///MOŻE STRZELIĆ ALE NIE TRAFIŁ
+                this.opponentBoard.hit(randX, randY, false);
+                return ([randX, randY]);
+            }
+        }
+
+
+    }
 }

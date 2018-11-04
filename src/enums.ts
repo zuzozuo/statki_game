@@ -3,7 +3,8 @@ export enum GameModes {
     PlayerPlacing,
     ComputerPlacing,
     PlayerShooting,
-    ComputerShooting
+    ComputerShooting,
+    EndGame
 }
 
 export enum ShipDirection {
@@ -14,3 +15,4 @@ export enum ShipDirection {
 export const BoardWidth = 10;
 export const BoardHeight = 10;
 export const Ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+export const Timeout = 1000;

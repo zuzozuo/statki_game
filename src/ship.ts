@@ -3,10 +3,14 @@ export class Ship {
     length: number
     direction: ShipDirection
     shipId: number
+    hitCounter: number
+    isSunken: boolean
     constructor(length: number, id: number) {
         this.length = length
         this.direction = ShipDirection.Vertical
         this.shipId = id;
+        this.hitCounter = 0;
+        this.isSunken = false;
 
         //console.log("Tworze nowy ship o dł: " + this.length)
     }
@@ -33,6 +37,13 @@ export class Ship {
         }
 
         return text;
+    }
+
+    addHitCounter() {
+        this.hitCounter++;
+        if (this.hitCounter == this.length) {
+            this.isSunken = true;
+        }
     }
 
     changeDirectionStyle(dir: ShipDirection, div: HTMLElement, len: number) {

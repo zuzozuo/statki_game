@@ -24,11 +24,10 @@ export class Board {
             html += '<div class="y">'
             for (let x = 0; x < this.board[y].length; x++) {
                 if (this.board[y][x] != 0) {
-                    html += '<div class="x"  style = "background-color: orange"  data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
+                    html += '<div class="x"  style = "background-color: rgba(87,48,50, 0.5)"  data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
                 } else {
                     html += '<div class="x" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
                 }
-
             }
             html += '</div>'
         }
@@ -106,5 +105,17 @@ export class Board {
             this.board[boardY][boardX] = id;
         }
     }
+
+
+
+    hit(x: number, y: number, isAccurate: boolean) {
+        if (isAccurate) {
+            this.board[y][x] = 2;
+        } else {
+            this.board[y][x] = 1;
+        }
+    }
+
+
 
 }

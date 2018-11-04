@@ -12,4 +12,11 @@ export class Player extends User {
         }
     }
 
+    playerShooting(x: number, y: number) {
+        if (this.opponentBoard.board[y][x] == 0) { ///MOŻE STRZELIĆ ALE NIE TRAFIŁ
+            this.opponentBoard.hit(x, y, false);
+            return ([x, y]);
+        }
+    }
+
 }
