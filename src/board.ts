@@ -23,10 +23,14 @@ export class Board {
         for (let y = 0; y < this.board.length; y++) {
             html += '<div class="y">'
             for (let x = 0; x < this.board[y].length; x++) {
-                if (this.board[y][x] != 0) {
-                    html += '<div class="x"  style = "background-color: rgba(87,48,50, 0.5)"  data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
+                if (this.board[y][x] != 0 && this.board[y][x] != -2 && this.board[y][x] != -1) {
+                    html += '<div class="x"  style = "background-color: rgba(87,48,50, 0.5)"  data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + ""/*this.board[y][x]*/ + '</div>';
+                } else if (this.board[y][x] == -2) {
+                    html += '<div class="x" style="background-color: black" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + ""/*this.board[y][x]*/ + '</div>';
+                } else if (this.board[y][x] == -1) {
+                    html += '<div class="x" style="background-color: yellow" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + ""/*this.board[y][x]*/ + '</div>';
                 } else {
-                    html += '<div class="x" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + this.board[y][x] + '</div>';
+                    html += '<div class="x" data-x="' + x + '" data-y="' + y + '" data-shipId="' + this.board[y][x] + '">' + ""/*this.board[y][x]*/ + '</div>';
                 }
             }
             html += '</div>'
@@ -34,7 +38,6 @@ export class Board {
 
         if (div) {
             div.innerHTML = html;
-
         }
 
     }
@@ -110,9 +113,9 @@ export class Board {
 
     hit(x: number, y: number, isAccurate: boolean) {
         if (isAccurate) {
-            this.board[y][x] = 2;
+            this.board[y][x] = -2;
         } else {
-            this.board[y][x] = 1;
+            this.board[y][x] = -1;
         }
     }
 

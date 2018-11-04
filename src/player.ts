@@ -16,7 +16,8 @@ export class Player extends User {
         if (this.opponentBoard.board[y][x] == 0) { ///MOŻE STRZELIĆ ALE NIE TRAFIŁ
             this.opponentBoard.hit(x, y, false);
             return ([x, y]);
+        } else if (this.opponentBoard.board[y][x] == -1 || this.opponentBoard.board[y][x] == -2) {
+            return false;
         }
-    }
 
-}
+    }

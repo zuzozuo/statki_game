@@ -19,15 +19,20 @@
     <div id="bigBoard">
         <div id="shipsMenu"></div>
         <div class="midBoard">
-            <p>BoardPlayerMine</p>
-            <div id="BoardPlayerMine" class="board"></div>
-            <div id="infoPlayerMine"></div>
-            <div id="infoForPlayer"></div>
-            <p>BoardPlayerOpponent</p>
-            <div id="BoardPlayerOpponent" class="board"></div>
-            <div id="infoPlayerOpponent"></div>
+            <div class="forBoard">
+                <p>BoardPlayerMine</p>
+                <div id="BoardPlayerMine" class="board"></div>
+                <div id="infoPlayerMine"></div>
+                <div id="infoForPlayer"></div>
+            </div>
+            <div class="forBoard">
+                <p>BoardPlayerOpponent</p>
+                <div id="BoardPlayerOpponent" class="board"></div>
+                <div id="infoPlayerOpponent"></div>
+                <div id="infoForComputer"></div>
+            </div>
         </div>
-        <div class="midBoard">
+        <div class="midBoard" id="computerBoards">
             <p>BoardComputerMine</p>
             <div id="BoardComputerMine" class="board"></div>
             <div id="infoForComputer"></div>

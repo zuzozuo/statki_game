@@ -35,6 +35,7 @@ export class Game {
             boards[i].addEventListener("click", this.onMouseClick.bind(this));
         }
 
+        console.log(this)
         this.player.init();
         this.computer.init();
         this.computer.shipsPlacing();
@@ -109,12 +110,19 @@ export class Game {
 
                         if (shootingCoords) {
                             if (this.computer.isShoot(shootingCoords[0], shootingCoords[1])) {
-                                this.player.opponentBoard.hit(shootingCoords[0], shootingCoords[1], true))
+                                this.player.opponentBoard.hit(shootingCoords[0], shootingCoords[1], true)
+                            }
+
+                            this.update();
+                            this.computersTurn();
+
+                        } else {
+                            if (this.infoForPlayer) {
+                                this.infoForPlayer.innerHTML = "Przeciez tu strzelales";
                             }
                         }
 
-                        this.update();
-                        this.computersTurn();
+
 
                     }
 
@@ -140,7 +148,12 @@ export class Game {
             let shootingCoords = this.computer.computerShooting();
             if (this.player.isShoot(shootingCoords[0], shootingCoords[1])) { //TRAFIŁ
                 this.computer.opponentBoard.hit(shootingCoords[0], shootingCoords[1], true)
+                this.player.myBoard.hit(shootingCoords[0], shootingCoords[1], true)
+            } else { //jak nie trafil
+                this.computer.opponentBoard.hit(shootingCoords[0], shootingCoords[1], false)
+                this.player.myBoard.hit(shootingCoords[0], shootingCoords[1], false)
             }
+
             this.update();
             this.mode = GameModes.PlayerShooting;
 
@@ -256,32 +269,32 @@ export class Game {
     update() {
         this.player.update();
         this.computer.update();
-        if (this.computer.isDead()) {
-            this.mode = GameModes.EndGame;
-            console.log("Kompjuter umarł")
-            if (this.infoForComputer) {
-                this.infoForComputer.innerHTML = "Umarłeś komputerku!.";
-            }
+        // if (this.computer.isDead()) {
+        //     this.mode = GameModes.EndGame;
+        //     console.log("Kompjuter umarł")
+        //     if (this.infoForComputer) {
+        //         this.infoForComputer.innerHTML = "Umarłeś komputerku!.";
+        //     }
 
-            if (this.infoForPlayer) {
-                this.infoForPlayer.innerHTML = "Wygrałeś Plejerze!";
-            }
+        //     if (this.infoForPlayer) {
+        //         this.infoForPlayer.innerHTML = "Wygrałeś Plejerze!";
+        //     }
 
-        }
+        // }
 
-        if (this.player.isDead()) {
-            console.log("Plejer umarł")
-            this.mode = GameModes.EndGame;
-            if (this.infoForComputer) {
-                this.infoForComputer.innerHTML = "Wygrałeś komputerku!.";
-            }
+        // if (this.player.isDead()) {
+        //     console.log("Plejer umarł")
+        //     this.mode = GameModes.EndGame;
+        //     if (this.infoForComputer) {
+        //         this.infoForComputer.innerHTML = "Wygrałeś komputerku!.";
+        //     }
 
-            if (this.infoForPlayer) {
-                this.infoForPlayer.innerHTML = "Przegrałeś Plejerze!";
-            }
+        //     if (this.infoForPlayer) {
+        //         this.infoForPlayer.innerHTML = "Przegrałeś Plejerze!";
+        //     }
 
 
-        }
+        // }
 
         console.log("UPDATE");
     }
